@@ -56,6 +56,8 @@ namespace LoRaWan.Test.Shared
 
         public bool Supports32BitFCnt { get; set; }
 
+        public string Deduplication { get; set; }
+
         public ushort RXDelay { get; set; } = 0;
 
         /// <summary>
@@ -95,6 +97,9 @@ namespace LoRaWan.Test.Shared
             desiredProperties[nameof(this.RX2DataRate)] = this.RX2DataRate;
 
             desiredProperties[nameof(this.RXDelay)] = this.RXDelay;
+
+            if (!string.IsNullOrEmpty(this.Deduplication))
+                desiredProperties[nameof(this.Deduplication)] = this.Deduplication;
 
             return desiredProperties;
         }
