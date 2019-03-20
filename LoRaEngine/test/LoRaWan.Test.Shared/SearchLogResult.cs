@@ -11,9 +11,11 @@ namespace LoRaWan.Test.Shared
         public bool Found { get; }
 
         // Returns the contents of the log (to diagnose problems)
-        public IReadOnlyCollection<string> Logs { get; }
+        public IReadOnlyCollection<SearchLogEvent> Logs { get; }
 
-        public SearchLogResult(bool found, HashSet<string> logs)
+        public SearchLogEvent MatchedEvent { get; set; }
+
+        public SearchLogResult(bool found, HashSet<SearchLogEvent> logs)
         {
             this.Found = found;
             this.Logs = logs;
