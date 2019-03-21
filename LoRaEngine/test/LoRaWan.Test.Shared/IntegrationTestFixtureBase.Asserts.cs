@@ -227,6 +227,11 @@ namespace LoRaWan.Test.Shared
 
         async Task<SearchLogResult> SearchIoTHubLogs(Func<SearchLogEvent, bool> predicate, SearchLogOptions options = null)
         {
+            return await this.SearchUdpLogs(evt => predicate(evt.Message), options);
+        }
+
+        async Task<SearchLogResult> SearchIoTHubLogs(Func<SearchLogEvent, bool> predicate, SearchLogOptions options = null)
+        {
             var maxAttempts = options?.MaxAttempts ?? this.Configuration.EnsureHasEventMaximumTries;
             var processedEvents = new HashSet<SearchLogEvent>();
             for (int i = 0; i < maxAttempts; i++)
@@ -267,6 +272,12 @@ namespace LoRaWan.Test.Shared
             }
 
             return new SearchLogResult(false, processedEvents, string.Empty);
+        }
+
+        // Searches IoT Hub for messages
+        async Task<SearchLogResult> SearchIoTHubLogs(Func<string, bool> predicate, SearchLogOptions options = null)
+        {
+            return await this.SearchIoTHubLogs(evt => predicate(evt.Message), options);
         }
 
         // Searches IoT Hub for messages
