@@ -53,9 +53,6 @@ pr:
  branches:
    include:
     - pat-dev-multi-gw-test
-   exclude:
-   - master
-   - dev
 
 # Enable CI on branches master and dev
 # Batch builds
@@ -64,9 +61,6 @@ trigger:
   branches:
     include:
     - pat-dev-multi-gw-test
-    exclude:
-    - dev
-    - master
 
 jobs:
 
